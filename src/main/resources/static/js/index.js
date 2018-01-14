@@ -1,3 +1,13 @@
-// I am going to continue to improve this...
-// I attempt to perform candle again but could not overcome the previous version.
-// http://codepen.io/fixcl/pen/nKFDr
+$('#login-button').click(function (event) {
+    var userName=document.getElementById("userName").value;
+    var pwd=document.getElementById("pwd").value;
+    if(userName==="你知道就好" &&  pwd==="20180106"){
+        event.preventDefault();
+        $('form').fadeOut(500);
+        $('.wrapper').addClass('form-success');
+        setTimeout(function(){location.href="BirthdayCake.html";},2000);
+    }
+    else{
+        alert("Wrong Password");
+    }
+});

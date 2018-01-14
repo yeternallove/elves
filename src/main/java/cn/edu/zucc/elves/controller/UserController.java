@@ -11,9 +11,9 @@ import java.util.List;
 public class UserController {
 
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String addUser() throws ParamException {
-        return "小草~";
-    }
+//    @RequestMapping(value = "/login", method = RequestMethod.GET)
+//    public String addUser() throws ParamException {
+//        return "小草~";
+//    }
 
 }

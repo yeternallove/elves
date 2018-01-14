@@ -47,49 +47,49 @@ public class AuthInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response, Object handler) throws Exception {
         boolean authFlag = true;
-        String contextPath = request.getContextPath();
-        String res = request.getRequestURI();
-        String requestUrl = "";
-        if (res.startsWith(contextPath)) {
-            requestUrl = res.substring(contextPath.length(), res.length());
-        }
-        if (!requestUrl.endsWith("/")) {
-            requestUrl = requestUrl + "/";
-        }
-        // 因此对login情况做排除
-        if (requestUrl.contains(loginUrl) || error.equals(requestUrl)) {
-            return true;
-        }
-        if (handler instanceof HandlerMethod) {
-            String sessionId = request.getSession().getId();
-            // 登录验证
-            if (sessionId == null) {
-                return true;
-            }
-            JSONObject json;
-            UserView user = UserSessionManger.get(sessionId);
-            if (user == null) {
-                authFlag = false;
-                logger.info("用户没有登录");
-                json = new JSONObject();
-                json.put("ErrorInfo", "用户没有登录");
-                json.put("errorCode", "401");
-                addHeadAndPrintWriteMsg(response, json.toString());
-            }
-            //有@auth注解的接口需要做权限验证
-//            Auth auth = ((HandlerMethod) handler).getMethod().getAnnotation(Auth.class);
-//            if (auth != null) {
+//        String contextPath = request.getContextPath();
+//        String res = request.getRequestURI();
+//        String requestUrl = "";
+//        if (res.startsWith(contextPath)) {
+//            requestUrl = res.substring(contextPath.length(), res.length());
+//        }
+//        if (!requestUrl.endsWith("/")) {
+//            requestUrl = requestUrl + "/";
+//        }
+//        // 因此对login情况做排除
+//        if (requestUrl.contains(loginUrl) || error.equals(requestUrl)) {
+//            return true;
+//        }
+//        if (handler instanceof HandlerMethod) {
+//            String sessionId = request.getSession().getId();
+//            // 登录验证
+//            if (sessionId == null) {
+//                return true;
+//            }
+//            JSONObject json;
+//            UserView user = UserSessionManger.get(sessionId);
+//            if (user == null) {
 //                authFlag = false;
-//                // 页面权限认证
-//                if (!authFlag) {
-//                    authFlag = false;
-//                    logger.Information("权限认证失败");
-//                    json.put("ErrorInfo", "权限认证失败");
-//                    json.put("errorCode", "402");
-//                    addHeadAndPrintWriteMsg(response, json.toString());
-//                }
-        }
-//    }
+//                logger.info("用户没有登录");
+//                json = new JSONObject();
+//                json.put("ErrorInfo", "用户没有登录");
+//                json.put("errorCode", "401");
+//                addHeadAndPrintWriteMsg(response, json.toString());
+//            }
+//            //有@auth注解的接口需要做权限验证
+////            Auth auth = ((HandlerMethod) handler).getMethod().getAnnotation(Auth.class);
+////            if (auth != null) {
+////                authFlag = false;
+////                // 页面权限认证
+////                if (!authFlag) {
+////                    authFlag = false;
+////                    logger.Information("权限认证失败");
+////                    json.put("ErrorInfo", "权限认证失败");
+////                    json.put("errorCode", "402");
+////                    addHeadAndPrintWriteMsg(response, json.toString());
+////                }
+//        }
+////    }
         return authFlag;
     }
 

@@ -5,8 +5,12 @@ package cn.edu.zucc.elves.model.info;
  * @Description:
  * @Date: Created in 2018/1/13
  **/
-public class ErrorInfo implements Information {
+public class FailureInfo {
     private String errMsg;
+
+    public FailureInfo(String errMsg) {
+        this.errMsg = errMsg;
+    }
 
     public String getErrMsg() {
         return errMsg;
